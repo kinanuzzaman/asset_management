@@ -2,7 +2,7 @@
   <q-page container>
     <q-list bordered separator>
       <q-item
-        :to="`/main/users/details/${user.id}`"
+        :to="`/users/details/${user.id}`"
         clickable
         v-ripple
         v-for="user in listUser"
@@ -18,7 +18,7 @@
     </q-list>
 
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
-      <q-btn :to="`/main/users/add`" fab icon="add" color="primary" />
+      <q-btn :to="`/users/add`" fab icon="add" color="primary" />
     </q-page-sticky>
   </q-page>
 </template>
@@ -42,6 +42,7 @@ export default {
       url: "http://127.0.0.1:8000/api/users",
       headers: {
         Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
+        // Authorization: 'Bearer' + localStorage.getItem('token')
       },
     };
 
