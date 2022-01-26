@@ -1,37 +1,49 @@
 <template>
-  <q-page>
-    <q-form @submit.prevent="addUser">
-      <q-input v-model="first_name" type="text" label="First Name" />
-      <q-input v-model="last_name" type="text" label="Last Name" />
-      <q-input
-        v-model="file"
-        @change="onFileSelected"
-        class="q-mt-md"
-        filled
-        type="file"
-        hint="Upload Image"
-      />
-      <q-card-actions align="right">
-        <q-btn
-          class="q-mt-xl"
-          color="gray"
-          text-color="#ddd"
-          unelevated
-          label="Cancel"
-          no-caps
-          v-close-popup
-        />
-        <q-btn
-          type="submit"
-          class="q-mt-xl"
-          color="blue"
-          text-color="white"
-          unelevated
-          label="Save"
-        />
-      </q-card-actions>
-    </q-form>
-  </q-page>
+  <q-layout view="lHh lpr lFf" class="shadow-2 rounded-borders">
+    <q-header elevated>
+      <q-toolbar>
+        <q-btn flat dense round icon="arrow_back" to="/main/users" />
+
+        <q-toolbar-title class="flex flex-center"> ADD USER</q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+
+    <q-page-container>
+      <q-page class="q-ml-md">
+        <q-form @submit.prevent="addUser">
+          <q-input v-model="first_name" type="text" label="First Name" />
+          <q-input v-model="last_name" type="text" label="Last Name" />
+          <q-input
+            v-model="file"
+            @change="onFileSelected"
+            class="q-mt-md"
+            filled
+            type="file"
+            hint="Upload Image"
+          />
+          <q-card-actions align="right">
+            <q-btn
+              class="q-mt-xl"
+              color="gray"
+              text-color="#ddd"
+              unelevated
+              label="Cancel"
+              no-caps
+              v-close-popup
+            />
+            <q-btn
+              type="submit"
+              class="q-mt-xl"
+              color="blue"
+              text-color="white"
+              unelevated
+              label="Save"
+            />
+          </q-card-actions>
+        </q-form>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 <script>
 import axios from "axios";

@@ -1,26 +1,13 @@
 
 const routes = [
-  // Login
+  // SubLayout
   {
     path: '/',
-    component: () => import('layouts/Login.vue'),
+    component: () => import('src/layouts/SubLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Login.vue') },
       { path: 'register', component: () => import('pages/Register.vue') },
       { path: 'reqpass', component: () => import('pages/Reqpass.vue') },
-     
-     
-    ]
-  },
-  // Main Layout
-  {
-    path: '/main',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: 'home', component: () => import('pages/Index.vue') },
-      { path: 'users', component: () => import('pages/Users.vue') },
-     
-      { path: 'equipments', component: () => import('pages/Equipments.vue') },
       { path: 'users/add', component: () => import('pages/UserAdd.vue') },
      
       { path: 'users/details/:id', component: () => import('pages/UserDetails.vue') },
@@ -30,6 +17,19 @@ const routes = [
       { path: 'equipments/add', component: () => import('src/pages/EquipmentAdd.vue') },
       { path: 'equipments/details/:id', component: () => import('pages/EquipmentDetails.vue') },
       { path: 'equipments/details/edit/:id', component: () => import('pages/EquipmentEdit.vue') },
+     
+    ]
+  },
+  // Main Layout
+  {
+    path: '/main',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      
+      { path: 'users', component: () => import('pages/Users.vue') },
+     
+      { path: 'equipments', component: () => import('pages/Equipments.vue') },
+    
       
     ],
     

@@ -11,7 +11,7 @@
           class="col-10"
           clickable
           v-ripple
-          :to="`/main/equipments/details/${list.id}`"
+          :to="`/equipments/details/${list.id}`"
         >
           <q-item-section> {{ list.name }}</q-item-section>
         </q-item>

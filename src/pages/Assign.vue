@@ -1,7 +1,23 @@
 <template>
-  <div>
-    <q-layout>
-      <div>
+  <q-layout view="lHh lpr lFf" class="shadow-2 rounded-borders">
+    <q-header elevated>
+      <q-toolbar>
+        <q-btn
+          flat
+          dense
+          round
+          icon="arrow_back"
+          :to="`/users/details/${id}`"
+        />
+
+        <q-toolbar-title class="flex flex-center">
+          Assign Equipments</q-toolbar-title
+        >
+      </q-toolbar>
+    </q-header>
+
+    <q-page-container>
+      <q-page>
         <div class="q-ml-md">
           <q-input
             label="Search"
@@ -46,10 +62,9 @@
           label="Assign"
           no-caps
         />
-        <!-- :to="`/main/users/details/${id}`" -->
-      </div>
-    </q-layout>
-  </div>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script>
@@ -97,7 +112,7 @@ export default {
         method: "PATCH",
         url: "http://127.0.0.1:8000/api/products/assign/" + search,
         data: {
-          user_id: this.user_id,
+          user_id: this.id,
         },
         headers: {
           Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",

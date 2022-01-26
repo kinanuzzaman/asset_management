@@ -9,7 +9,7 @@
             style="width: 80px; height: 80px"
           />
         </div>
-
+        <!--  @submit.prevent="login" -->
         <q-form>
           <q-input
             clearable
@@ -29,10 +29,12 @@
               />
             </template>
           </q-input>
+          <!--  -->
           <q-btn
+            type="submit"
+            to="/main/users"
             id="btn"
             class="q-mt-md"
-            to="/main/users"
             color="black"
             text-color="white"
             label="Login"
@@ -88,6 +90,7 @@ export default {
         .catch(function (error) {
           console.error(error);
         });
+      localStorage.setItem("token", response.data.token);
     },
   },
 };
