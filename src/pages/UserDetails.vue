@@ -1,11 +1,13 @@
 <template>
-  <q-layout>
+  <q-page>
     <q-list>
       <q-item>
+        <q-item-sectin>
+          <q-btn flat dense round icon="arrow_back" to="/main/users"
+        /></q-item-sectin>
         <q-item-section class="flex flex-center">
           <q-item-label> {{ user.full_name }}</q-item-label>
         </q-item-section>
-
         <q-btn round flat icon="edit">
           <q-menu auto-close :offset="[110, 0]">
             <q-list style="min-width: 150px">
@@ -18,6 +20,11 @@
             </q-list>
           </q-menu>
         </q-btn>
+      </q-item>
+      <q-item>
+        <q-item-section class="flex flex-center">
+          <q-item-label></q-item-label>
+        </q-item-section>
       </q-item>
       <q-item>
         <q-item-section class="flex flex-center">
@@ -36,7 +43,7 @@
       bordered
       separator
       v-for="product in user.products"
-      :key="product[id]"
+      :key="product['id']"
     >
       <q-item>
         <q-item-section>
@@ -55,10 +62,10 @@
               <q-item clickable @click="alert = true">
                 <q-item-section>Restock to Inventory</q-item-section>
               </q-item>
-              <q-item clickable @click="popDiscard(product[id])">
+              <q-item clickable @click="popDiscard(product['id'])">
                 <q-item-section>Discard Item</q-item-section>
               </q-item>
-              <q-item clickable @click="popDefect(product[id])">
+              <q-item clickable @click="popDefect(product['id'])">
                 <q-item-section>Mark Defective</q-item-section>
               </q-item>
             </q-list>
@@ -117,7 +124,7 @@
         <q-card-section class="q-pt-none">
           <q-input
             dense
-            v-model="discard_details"
+            v-model="defect_details"
             autofocus
             @keyup.enter="defprompt = false"
           ></q-input>
@@ -176,7 +183,7 @@
         color="primary"
       />
     </q-page-sticky>
-  </q-layout>
+  </q-page>
 </template>
 
 <script>

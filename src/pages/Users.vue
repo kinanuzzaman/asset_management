@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <q-page container>
     <q-list bordered separator>
       <q-item
         :to="`/main/users/details/${user.id}`"
@@ -20,7 +20,7 @@
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
       <q-btn :to="`/main/users/add`" fab icon="add" color="primary" />
     </q-page-sticky>
-  </div>
+  </q-page>
 </template>
 <script>
 import axios from "axios";

@@ -1,5 +1,5 @@
 <template>
-  <q-layout>
+  <q-page>
     <q-form @submit.prevent="addUser">
       <q-input v-model="first_name" type="text" label="First Name" />
       <q-input v-model="last_name" type="text" label="Last Name" />
@@ -31,8 +31,7 @@
         />
       </q-card-actions>
     </q-form>
-    <q-btn color="primary" icon="back" label="Back" to="/main/users" />
-  </q-layout>
+  </q-page>
 </template>
 <script>
 import axios from "axios";

@@ -1,39 +1,40 @@
 <template>
-  <q-layout>
-    <q-form @submit.prevent="EditUser()">
-      <q-input v-model="first_name" type="text" label="First Name" />
-      <q-input v-model="last_name" type="text" label="Last Name" />
-      <q-input
-        v-model="file"
-        @change="onFileSelected"
-        class="q-mt-md"
-        filled
-        type="file"
-        hint="Upload Image"
-      />
-      <q-card-actions align="right">
-        <q-btn
-          :to="`/main/users/details/${this.id}`"
-          class="q-mt-xl"
-          color="gray"
-          text-color="#ddd"
-          unelevated
-          label="Cancel"
-          no-caps
+  <q-page>
+    <q-list>
+      <q-form @submit.prevent="EditUser()">
+        <q-input v-model="first_name" type="text" label="First Name" />
+        <q-input v-model="last_name" type="text" label="Last Name" />
+        <q-input
+          v-model="file"
+          @change="onFileSelected"
+          class="q-mt-md"
+          filled
+          type="file"
+          hint="Upload Image"
         />
-        <q-btn
-          type="submit"
-          class="q-mt-xl"
-          color="blue"
-          text-color="white"
-          unelevated
-          label="Save"
-          no-caps
-          v-close-popup
-        />
-      </q-card-actions>
-    </q-form>
-  </q-layout>
+        <q-card-actions align="right">
+          <q-btn
+            :to="`/main/users/details/${this.id}`"
+            class="q-mt-xl"
+            color="gray"
+            text-color="#ddd"
+            unelevated
+            label="Cancel"
+            no-caps
+          />
+          <q-btn
+            type="submit"
+            class="q-mt-xl"
+            color="blue"
+            text-color="white"
+            unelevated
+            label="Save"
+            no-caps
+            v-close-popup
+          />
+        </q-card-actions> </q-form
+    ></q-list>
+  </q-page>
 </template>
 <script>
 import axios from "axios";

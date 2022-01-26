@@ -1,18 +1,19 @@
 <template>
-  <q-layout>
+  <q-page>
     <div class="q-pa-md">
       <div class="q-gutter-sm">
         <q-form>
           <div class="q-pa-md" style="max-width: 300px">
             <div class="q-gutter-md">
               <q-select
-                v-model="category_id"
+                v-model="name"
                 :options="categories"
                 label="Standard"
                 option-label="name"
               />
 
               <q-input v-model="brand" type="text" label="BRAND" />
+
               <q-input v-model="model" type="text" label="MODEL" />
               <q-input v-model="description" type="text" label="DESCRIPTION" />
             </div>
@@ -63,7 +64,7 @@
         </q-form>
       </div>
     </div>
-  </q-layout>
+  </q-page>
 </template>
 
 <script>

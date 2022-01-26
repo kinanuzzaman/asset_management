@@ -1,5 +1,5 @@
 <template>
-  <q-layout class="flex flex-center">
+  <q-page class="flex flex-center">
     <q-card>
       <q-card-section>
         <div class="flex flex-center">
@@ -50,9 +50,10 @@
         </q-list>
       </q-card-section>
     </q-card>
-  </q-layout>
+  </q-page>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {

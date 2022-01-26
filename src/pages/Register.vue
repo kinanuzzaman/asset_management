@@ -1,5 +1,5 @@
 <template>
-  <q-layout class="flex flex-center">
+  <q-page class="flex flex-center">
     <q-card>
       <q-card-section>
         <div class="flex flex-center">
@@ -10,7 +10,7 @@
           />
         </div>
 
-        <q-form @submit.prevent="register()">
+        <q-form @submit.prevent="register">
           <q-input clearable v-model="first_name" label="FIRST NAME" />
 
           <q-input clearable v-model="last_name" label="LAST NAME" />
@@ -59,7 +59,6 @@
             type="submit"
             id="btn"
             class="q-ma-md"
-            to="/"
             color="black"
             text-color="white"
             label="REGISTER"
@@ -75,7 +74,7 @@
         </q-form>
       </q-card-section>
     </q-card>
-  </q-layout>
+  </q-page>
 </template>
 <script>
 import axios from "axios";
@@ -122,6 +121,7 @@ export default {
         })
         .catch(function (error) {
           console.error(error);
+          this.alert = true;
         });
     },
   },

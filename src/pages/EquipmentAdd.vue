@@ -55,7 +55,11 @@
             </q-item>
           </q-list>
           <q-card-actions align="right">
-            <q-btn flat label="CANCEL" v-close-popup />
+            <q-btn
+              flat
+              label="BACK"
+              :to="`/main/equipments/details/${category_id['id']}`"
+            />
             <q-btn
               type="submit"
               color="blue"
@@ -136,9 +140,11 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.products = response.data;
+          alert("Product added succesfully");
         })
         .catch(function (error) {
           console.error(error);
+          alert("Product add unsuccesfull");
         });
     },
   },

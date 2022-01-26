@@ -11,9 +11,7 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title class="flex flex-center">
-          {{ title }}
-        </q-toolbar-title>
+        <q-toolbar-title class="flex flex-center">{{ title }}</q-toolbar-title>
       </q-toolbar>
     </q-header>
     <q-drawer
@@ -32,6 +30,7 @@
           Daniel<br />
           daniel@example.com
         </q-item-label>
+        <!-- Navigate Users -->
         <q-item to="/main/users" @click="titleChange('Users')">
           <q-item-section style="font-size: 2em">
             <q-icon name="supervised_user_circle"
@@ -40,6 +39,7 @@
             <q-item-label>USERS</q-item-label>
           </q-item-section>
         </q-item>
+        <!-- Navigate Equipments -->
         <q-item to="/main/equipments" @click="titleChange('Equipments')">
           <q-item-section style="font-size: 2em">
             <q-icon name="shopping_cart" />
@@ -81,13 +81,17 @@ export default {
 
   data() {
     return {
+      title: "Users",
       leftDrawerOpen: false,
-      title: "Asset Management",
     };
   },
+
   methods: {
     titleChange(x) {
       this.title = x;
+    },
+    getCategory(category) {
+      this.intro = category;
     },
   },
 };

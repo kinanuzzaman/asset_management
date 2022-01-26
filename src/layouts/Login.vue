@@ -1,14 +1,11 @@
 <template>
   <q-layout>
-    <q-page-container>
-      <router-view />
-    </q-page-container>
+    <router-view />
   </q-layout>
 </template>
 <script>
 export default {
-  name: "PageIndex",
+  name: "",
 };
 </script>
-<style>
-</style>
+<style></style>
