@@ -106,10 +106,10 @@ export default {
       fd.append("password_confirmation", this.password_confirmation);
       const options = {
         method: "POST",
-        url: "http://127.0.0.1:8000/api/admins/register",
+        url: "https://assets-api.dev.sandbox3000.com/api/admins/register",
         data: fd,
         headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+          Authorization: "Bearer" + localStorage.getItem("token"),
         },
       };
 

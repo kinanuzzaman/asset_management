@@ -77,7 +77,7 @@ export default {
         url: "http://127.0.0.1:8000/api/login",
         data: fd,
         headers: {
-          Authorization: "8|JdXmwaAd4Ff3V2srhBX8cBvVGNetHXfkcajvopzA",
+          Authorization: "Bearer" + localStorage.getItem("token"),
         },
       };
 

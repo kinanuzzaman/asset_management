@@ -105,6 +105,7 @@ export default {
         })
         .catch(function (error) {
           console.error(error);
+          alert("Equipments not found");
         });
     },
     assignProduct(search) {
