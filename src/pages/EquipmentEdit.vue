@@ -2,7 +2,13 @@
   <q-layout view="lHh lpr lFf" class="shadow-2 rounded-borders">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat dense round icon="arrow_back" to="/main/equipments" />
+        <q-btn
+          flat
+          dense
+          round
+          icon="arrow_back"
+          :to="`/equipments/details/${id}/${eqId}`"
+        />
 
         <q-toolbar-title class="flex flex-center">
           EDIT EQUIPMENTS</q-toolbar-title
@@ -94,11 +100,14 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 export default {
   data() {
     return {
-      flag: this.$route.params.id,
+      id: this.$route.params.id,
+      eqId: this.$route.params.eqId,
+      pId: this.$route.params.pId,
+      flag: "",
       discarded: false,
       defected: false,
       categories: [],
@@ -115,6 +124,7 @@ export default {
   },
   created() {
     this.getData();
+    this.getProduct();
   },
   methods: {
     getData() {
@@ -126,7 +136,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -137,15 +147,38 @@ export default {
           console.error(error);
         });
     },
+    getProduct() {
+      const options = {
+        method: "GET",
+        url: "http://127.0.0.1:8000/api/products/" + this.pId,
+        headers: {
+          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        },
+      };
+
+      this.$axios
+        .request(options)
+        .then((response) => {
+          console.log(response.data);
+          this.catDetails = response.data;
+          this.category_id = response.data.data.id;
+          this.brand = response.data.data.attributes.brand;
+          this.model = response.data.data.attributes.model;
+          this.description = response.data.data.attributes.description;
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    },
     // EDIT
-    popEdit(id) {
+    popEdit(val) {
       this.eprompt = true;
-      this.flag = id;
+      this.flag = val;
     },
     editcategories(flag) {
       const options = {
         method: "PATCH",
-        url: "http://127.0.0.1:8000/api/products/" + flag,
+        url: "/products/" + flag,
         data: {
           category_id: this.category_id.id,
           brand: this.brand,
@@ -157,7 +190,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);

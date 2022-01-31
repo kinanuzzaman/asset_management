@@ -2,7 +2,13 @@
   <q-layout view="lHh lpr lFf" class="shadow-2 rounded-borders">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat dense round icon="arrow_back" to="/main/equipments" />
+        <q-btn
+          flat
+          dense
+          round
+          icon="arrow_back"
+          :to="`/equipments/details/${id}/${eqId}`"
+        />
 
         <q-toolbar-title class="flex flex-center">
           ADD EQUIPMENTS</q-toolbar-title
@@ -81,8 +87,8 @@
               <q-card-actions align="right">
                 <q-btn
                   flat
-                  label="BACK"
-                  :to="`/main/equipments/details/${category_id['id']}`"
+                  label="CANCEL"
+                  :to="`/equipments/details/${id}/${eqId}`"
                 />
                 <q-btn
                   type="submit"
@@ -101,10 +107,12 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 export default {
   data() {
     return {
+      id: this.$route.params.id,
+      eqId: this.$route.params.eqId,
       discarded: false,
       defected: false,
 
@@ -125,13 +133,13 @@ export default {
 
     const options = {
       method: "GET",
-      url: "http://127.0.0.1:8000/api/categories",
+      url: "/categories",
       headers: {
         Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
       },
     };
 
-    axios
+    this.$axios
       .request(options)
       .then((response) => {
         console.log(response.data);
@@ -161,12 +169,13 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
           this.products = response.data;
           alert("Product added succesfully");
+          this.$router.push("/equipments/details/" + this.id + "/" + this.eqId);
         })
         .catch(function (error) {
           console.error(error);

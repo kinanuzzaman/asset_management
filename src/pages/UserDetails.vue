@@ -2,16 +2,16 @@
   <q-layout view="lHh lpr lFf" class="shadow-2 rounded-borders">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat dense round icon="arrow_back" to="/main/users" />
+        <q-btn flat dense round icon="arrow_back" :to="`/main/users/${id}`" />
 
         <q-toolbar-title class="flex flex-center">
-          {{ user.full_name }}</q-toolbar-title
+          {{ full_name }}</q-toolbar-title
         >
 
         <q-btn round flat icon="edit">
           <q-menu auto-close :offset="[110, 0]">
             <q-list style="min-width: 150px">
-              <q-item clickable :to="`/users/details/edit/${user.id}`">
+              <q-item clickable :to="`/users/details/edit/${id}/${user.id}`">
                 <q-item-section>Edit</q-item-section>
               </q-item>
               <q-item clickable @click="popDel(user.id)">
@@ -43,8 +43,14 @@
         >
           <q-item>
             <q-item-section>
+              <q-item-label caption>
+                {{ product["category_id"] }}
+              </q-item-label>
               <q-item-label>
-                {{ product["brand"] }}
+                {{ product["brand"] }} {{ product["model"] }}
+              </q-item-label>
+              <q-item-label>
+                {{ product["description"] }}
               </q-item-label>
             </q-item-section>
             <q-badge
@@ -173,7 +179,7 @@
 
         <q-page-sticky position="bottom-right" :offset="[18, 18]">
           <q-btn
-            :to="`/users/details/assign/${user.id}`"
+            :to="`/users/details/assign/${id}/${user.id}`"
             fab
             icon="add"
             color="primary"
@@ -184,17 +190,19 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 export default {
   data() {
     return {
       id: this.$route.params.id,
+      userId: this.$route.params.userId,
       flag: "",
       disprompt: false,
       defprompt: false,
       alert: false,
       ralert: false,
       user: null,
+      full_name: "",
       products: [],
       category: "",
       user_id: "",
@@ -209,17 +217,18 @@ export default {
     getUser() {
       const options = {
         method: "GET",
-        url: "http://127.0.0.1:8000/api/users/" + this.id,
+        url: "/users/" + this.userId,
         headers: {
           Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
           this.user = response.data;
+          this.full_name = response.data.full_name;
         })
         .catch(function (error) {
           console.error(error);
@@ -231,7 +240,7 @@ export default {
 
       const options = {
         method: "PATCH",
-        url: "http://127.0.0.1:8000/api/products/assign/" + this.id,
+        url: "http://127.0.0.1:8000/api/products/assign/" + this.userId,
         headers: {
           Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
         },
@@ -240,7 +249,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -268,7 +277,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -296,7 +305,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -308,9 +317,9 @@ export default {
       this.getData();
     },
     // DELETE USER
-    popDel(id) {
+    popDel(val) {
       this.alert = true;
-      this.flag = id;
+      this.flag = val;
     },
 
     delCategory(flag) {
@@ -322,7 +331,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);

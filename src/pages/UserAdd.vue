@@ -2,7 +2,7 @@
   <q-layout view="lHh lpr lFf" class="shadow-2 rounded-borders">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat dense round icon="arrow_back" to="/main/users" />
+        <q-btn flat dense round icon="arrow_back" :to="`/main/users/${id}`" />
 
         <q-toolbar-title class="flex flex-center"> ADD USER</q-toolbar-title>
       </q-toolbar>
@@ -46,10 +46,11 @@
   </q-layout>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   data() {
     return {
+      id: this.$route.params.id,
       first_name: "",
       last_name: "",
       file: null,
@@ -77,11 +78,12 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
-          this.name = response.data;
+          this.listUser = response.data;
+          this.$router.push("/main/users/" + this.id);
         })
         .catch(function (error) {
           console.error(error);

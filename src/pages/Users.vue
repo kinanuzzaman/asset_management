@@ -2,7 +2,7 @@
   <q-page container>
     <q-list bordered separator>
       <q-item
-        :to="`/users/details/${user.id}`"
+        :to="`/users/details/${id}/${user.id}`"
         clickable
         v-ripple
         v-for="user in listUser"
@@ -18,19 +18,16 @@
     </q-list>
 
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
-      <q-btn :to="`/users/add`" fab icon="add" color="primary" />
+      <q-btn :to="`/users/add/${id}`" fab icon="add" color="primary" />
     </q-page-sticky>
   </q-page>
 </template>
 <script>
-import axios from "axios";
-
+//import axios from "axios";
 export default {
   data() {
     return {
-      first_name: "",
-      last_name: "",
-      file: null,
+      id: this.$route.params.id,
       prompt: false,
       listUser: [],
       address: "",
@@ -39,14 +36,14 @@ export default {
   created() {
     const options = {
       method: "GET",
-      url: "http://127.0.0.1:8000/api/users",
+      url: "/users",
       headers: {
         Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
         // Authorization: 'Bearer' + localStorage.getItem('token')
       },
     };
 
-    axios
+    this.$axios
       .request(options)
       .then((response) => {
         console.log(response.data);
@@ -55,28 +52,6 @@ export default {
       .catch(function (error) {
         console.error(error);
       });
-  },
-  methods: {
-    //Get data each time after update
-    getData() {
-      const options = {
-        method: "GET",
-        url: "http://127.0.0.1:8000/api/users",
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
-      };
-
-      axios
-        .request(options)
-        .then((response) => {
-          console.log(response.data);
-          this.listEquipment = response.data;
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    },
   },
 };
 </script>

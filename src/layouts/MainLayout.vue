@@ -20,18 +20,22 @@
       bordered
       content-class="bg-grey-1"
     >
+      <!--    Mr.Munir<br />
+          munir@gmail.com -->
       <q-list>
         <q-item-label header id="hero">
           <img
-            alt="Avatar"
-            src="~assets/Admin.png"
+            src="../assets/Admin.png"
+            alt=""
             style="width: 80px; height: 80px"
-          /><br />
-          Daniel<br />
-          daniel@example.com
+          />
+          <br />
+
+          {{ admin.first_name }} {{ admin.last_name }}<br />
+          {{ admin.email }}
         </q-item-label>
         <!-- Navigate Users -->
-        <q-item to="/main/users" @click="titleChange('Users')">
+        <q-item :to="`/main/users/${id}`" @click="titleChange('Users')">
           <q-item-section style="font-size: 2em">
             <q-icon name="supervised_user_circle"
           /></q-item-section>
@@ -40,7 +44,10 @@
           </q-item-section>
         </q-item>
         <!-- Navigate Equipments -->
-        <q-item to="/main/equipments" @click="titleChange('Equipments')">
+        <q-item
+          :to="`/main/equipments/${id}`"
+          @click="titleChange('Equipments')"
+        >
           <q-item-section style="font-size: 2em">
             <q-icon name="shopping_cart" />
           </q-item-section>
@@ -76,16 +83,39 @@
 </template>
 
 <script>
+// import axios from "axios";
 export default {
   name: "MainLayout",
 
   data() {
     return {
+      id: this.$route.params.id,
       title: "Users",
       leftDrawerOpen: false,
+      admin: null,
     };
   },
+  created() {
+    const options = {
+      method: "GET",
+      url: "/admins/" + this.id,
+      // url: "/admins/1",
+      headers: {
+        Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
+        // Authorization: 'Bearer' + localStorage.getItem('token')
+      },
+    };
 
+    this.$axios
+      .request(options)
+      .then((response) => {
+        console.log(response.data);
+        this.admin = response.data;
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  },
   methods: {
     titleChange(x) {
       this.title = x;

@@ -7,7 +7,7 @@
           dense
           round
           icon="arrow_back"
-          :to="`/users/details/${id}`"
+          :to="`/users/details/${id}/${userId}`"
         />
 
         <q-toolbar-title class="flex flex-center">
@@ -68,11 +68,12 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 export default {
   data() {
     return {
       id: this.$route.params.id,
+      userId: this.$route.params.userId,
       search: "",
       products: null,
       user_id: "",
@@ -86,13 +87,13 @@ export default {
     getProduct(search) {
       const options = {
         method: "GET",
-        url: "http://127.0.0.1:8000/api/products/" + search,
+        url: "/products/" + search,
         headers: {
           Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -111,20 +112,21 @@ export default {
     assignProduct(search) {
       const options = {
         method: "PATCH",
-        url: "http://127.0.0.1:8000/api/products/assign/" + search,
+        url: "/products/assign/" + search,
         data: {
-          user_id: this.id,
+          user_id: this.userId,
         },
         headers: {
           Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
           this.products = response.data;
+          this.$router.push("/users/details/" + this.id + "/" + this.userId);
         })
         .catch(function (error) {
           console.error(error);

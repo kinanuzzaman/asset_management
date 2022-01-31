@@ -9,8 +9,8 @@
             style="width: 80px; height: 80px"
           />
         </div>
-        <!--  @submit.prevent="login" -->
-        <q-form>
+        <!--   -->
+        <q-form @submit.prevent="login">
           <q-input
             clearable
             v-model="email"
@@ -29,10 +29,9 @@
               />
             </template>
           </q-input>
-          <!--  -->
+          <!--   to="/main/users"  -->
           <q-btn
             type="submit"
-            to="/main/users"
             id="btn"
             class="q-mt-md"
             color="black"
@@ -55,10 +54,12 @@
   </q-page>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
+//import setToken from "../setToken.js";
 export default {
   data() {
     return {
+      id: "",
       email: "",
       password: "",
       isPwd: true,
@@ -74,23 +75,30 @@ export default {
 
       const options = {
         method: "POST",
-        url: "http://127.0.0.1:8000/api/login",
+        url: "/login",
         data: fd,
+        // headers: {
+        //   //Authorization: "Bearer" + localStorage.getItem("token"),
+        // },
         headers: {
-          Authorization: "Bearer" + localStorage.getItem("token"),
+          Authorization: "Bearer 7|LhUF7CqFjOqVePcvo9FQaGzfpKLU48xgkVvBfcGu",
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
           this.admin = response.data;
+          this.id = response.data.data.id;
+          // localStorage.setItem("userToken", response.data.token);
+          this.$router.push("/main/users/" + this.id);
         })
         .catch(function (error) {
           console.error(error);
+          // localStorage.removeItem("userToken");
         });
-      localStorage.setItem("token", response.data.token);
+      //
     },
   },
 };

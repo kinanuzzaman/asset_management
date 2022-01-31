@@ -11,7 +11,7 @@
           class="col-10"
           clickable
           v-ripple
-          :to="`/equipments/details/${list.id}`"
+          :to="`/equipments/details/${id}/${list.id}`"
         >
           <q-item-section> {{ list.name }}</q-item-section>
         </q-item>
@@ -74,7 +74,7 @@
               under it?
             </q-card-section>
 
-            <q-card-actions id="right">
+            <q-card-actions align="right">
               <q-btn flat label="CANCEL" v-close-popup />
               <q-btn
                 v-model="flag"
@@ -123,7 +123,7 @@
   ></q-page>
 </template>
 <script>
-import axios from "axios";
+//import axios from "axios";
 export default {
   data() {
     return {
@@ -132,7 +132,8 @@ export default {
       alert: false,
       listEquipment: [],
       name: "",
-      flag: this.$route.params.id,
+      flag: "",
+      id: this.$route.params.id,
     };
   },
   created() {
@@ -144,13 +145,13 @@ export default {
     getData() {
       const options = {
         method: "GET",
-        url: "http://127.0.0.1:8000/api/categories",
+        url: "/categories",
         headers: {
           Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -174,7 +175,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -186,9 +187,9 @@ export default {
       this.getData();
     },
     // EDIT
-    popEdit(id) {
+    popEdit(val) {
       this.eprompt = true;
-      this.flag = id;
+      this.flag = val;
     },
     editCategory(flag) {
       const options = {
@@ -202,7 +203,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -228,7 +229,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);

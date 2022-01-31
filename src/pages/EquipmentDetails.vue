@@ -2,7 +2,13 @@
   <q-layout view="lHh lpr lFf" class="shadow-2 rounded-borders">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat dense round icon="arrow_back" to="/main/equipments" />
+        <q-btn
+          flat
+          dense
+          round
+          icon="arrow_back"
+          :to="`/main/equipments/${id}`"
+        />
 
         <q-toolbar-title class="flex flex-center">
           {{ categories.name }}</q-toolbar-title
@@ -22,8 +28,8 @@
             <q-item>
               <q-item-section>
                 <q-item-label
-                  >{{ product["model"] }} {{ product["brand"] }}</q-item-label
-                >
+                  >{{ product["brand"] }} {{ product["model"] }}
+                </q-item-label>
                 <q-item-label>{{ product["description"] }}</q-item-label>
               </q-item-section>
 
@@ -32,7 +38,7 @@
                   <q-list style="min-width: 150px">
                     <q-item
                       clickable
-                      :to="`/equipments/details/edit/${product['id']}`"
+                      :to="`/equipments/edit/${id}/${eqId}/${product['id']}`"
                     >
                       <q-item-section>Edit</q-item-section>
                     </q-item>
@@ -93,8 +99,8 @@
               <q-card-actions align="right" class="text-primary">
                 <q-btn flat label="CANCEL" v-close-popup />
                 <q-btn
-                  v-model="flag"
-                  @click.prevent="defectProduct(flag)"
+                  v-model="eqId"
+                  @click.prevent="defectProduct(eqId)"
                   type="submit"
                   color="primary"
                   flat
@@ -123,8 +129,8 @@
               <q-card-actions align="right" class="text-primary">
                 <q-btn flat label="CANCEL" v-close-popup />
                 <q-btn
-                  v-model="flag"
-                  @click.prevent="defectProduct(flag)"
+                  v-model="eqId"
+                  @click.prevent="defectProduct(eqId)"
                   type="submit"
                   color="primary"
                   flat
@@ -136,19 +142,26 @@
           </q-dialog>
 
           <q-page-sticky position="bottom-right" :offset="[18, 18]">
-            <q-btn to="/equipments/add" fab icon="add" color="primary" />
+            <q-btn
+              :to="`/equipments/add/${id}/${eqId}`"
+              fab
+              icon="add"
+              color="primary"
+            />
           </q-page-sticky></div
       ></q-page>
     </q-page-container>
   </q-layout>
 </template>
 <script>
-import axios from "axios";
+//import axios from "axios";
 
 export default {
   data() {
     return {
-      flag: this.$route.params.id,
+      id: this.$route.params.id,
+      eqId: this.$route.params.eqId,
+      flag: "",
       disprompt: false,
       defprompt: false,
       alert: false,
@@ -166,13 +179,13 @@ export default {
     getData() {
       const options = {
         method: "GET",
-        url: "http://127.0.0.1:8000/api/categories/" + this.flag,
+        url: "/categories/" + this.eqId,
         headers: {
           Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -184,9 +197,9 @@ export default {
     },
 
     //Delete
-    popDel(id) {
+    popDel(val) {
       this.alert = true;
-      this.flag = id;
+      this.flag = val;
     },
 
     delProduct(flag) {
@@ -198,7 +211,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -207,16 +220,17 @@ export default {
         .catch(function (error) {
           console.error(error);
         });
+      this.getData();
     },
     // Discard product
-    popDiscard(id) {
+    popDiscard(val) {
       this.disprompt = true;
-      this.flag = id;
+      this.flag = val;
     },
     discardProduct(flag) {
       const options = {
         method: "PATCH",
-        url: "http://127.0.0.1:8000/api/products/discard/" + flag,
+        url: "/products/discard/" + flag,
         data: {
           discard_details: this.discard_details,
         },
@@ -225,7 +239,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
@@ -237,14 +251,14 @@ export default {
         });
     },
     // Defect Product
-    popDefect(id) {
+    popDefect(val) {
       this.defprompt = true;
-      this.flag = id;
+      this.flag = val;
     },
     defectProduct(flag) {
       const options = {
         method: "PATCH",
-        url: "http://127.0.0.1:8000/api/products/defect/" + flag,
+        url: "/products/defect/" + flag,
         data: {
           defect_details: this.defect_details,
         },
@@ -253,7 +267,7 @@ export default {
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);

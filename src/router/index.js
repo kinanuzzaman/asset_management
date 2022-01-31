@@ -2,6 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import routes from './routes'
+// import setToken from "../setToken.js";
+
+// if (localStorage.getItem("token")) {
+//   const token = localStorage.getItem("token");
+//   setToken(token);
+// }
 
 Vue.use(VueRouter)
 

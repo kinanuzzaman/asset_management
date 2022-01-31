@@ -2,7 +2,13 @@
   <q-layout view="lHh lpr lFf" class="shadow-2 rounded-borders">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat dense round icon="arrow_back" to="/main/users" />
+        <q-btn
+          flat
+          dense
+          round
+          icon="arrow_back"
+          :to="`/users/details/${id}/${userId}`"
+        />
 
         <q-toolbar-title class="flex flex-center"> EDIT USER</q-toolbar-title>
       </q-toolbar>
@@ -23,7 +29,7 @@
           />
           <q-card-actions align="right">
             <q-btn
-              :to="`/main/users/details/${this.id}`"
+              :to="`/users/details/${id}/${userId}`"
               class="q-mt-xl"
               color="gray"
               text-color="#ddd"
@@ -48,11 +54,12 @@
   </q-layout>
 </template>
 <script>
-import axios from "axios";
+//import axios from "axios";
 export default {
   data() {
     return {
       id: this.$route.params.id,
+      userId: this.$route.params.userId,
       first_name: "",
       last_name: "",
       file: null,
@@ -93,18 +100,19 @@ export default {
 
       const options = {
         method: "POST",
-        url: "http://127.0.0.1:8000/api/users/" + this.id,
+        url: "/users/" + this.userId,
         data: fd,
         headers: {
           Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
         },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
           this.userDetails = response.data;
+          this.$router.push("/users/details/" + this.id + "/" + this.userId);
         })
         .catch(function (error) {
           console.error(error);

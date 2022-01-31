@@ -89,6 +89,7 @@ export default {
       file: null,
       password: "",
       password_confirmation: "",
+      token: "",
     };
   },
   methods: {
@@ -104,23 +105,26 @@ export default {
       fd.append("image", this.file);
       fd.append("password", this.password);
       fd.append("password_confirmation", this.password_confirmation);
+      console.log(fd);
       const options = {
         method: "POST",
-        url: "https://assets-api.dev.sandbox3000.com/api/admins/register",
+        url: "/admins/register",
         data: fd,
-        headers: {
-          Authorization: "Bearer" + localStorage.getItem("token"),
-        },
+        // headers: {
+        //   Authorization: "Bearer" + localStorage.getItem("token"),
+        // },
       };
 
-      axios
+      this.$axios
         .request(options)
         .then((response) => {
           console.log(response.data);
           this.admin = response.data;
+          this.token = response.data.token;
+          this.$router.push("/");
         })
         .catch(function (error) {
-          console.error(error);
+          console.error(error.reponse);
           this.alert = true;
         });
     },
