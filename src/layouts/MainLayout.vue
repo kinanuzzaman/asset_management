@@ -96,11 +96,11 @@ export default {
       method: "GET",
       url: "/admins/" + this.id,
       // url: "/admins/1",
-      headers: {
-        // Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-        // Authorization: "Bearer 20|SP1OZFEvk1D3Rb1bsGVnZ8vA6cAoowVTyXqfY44L",
-      },
+      // headers: {
+      //   // Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
+      //   Authorization: "Bearer " + localStorage.getItem("token"),
+      //   // Authorization: "Bearer 20|SP1OZFEvk1D3Rb1bsGVnZ8vA6cAoowVTyXqfY44L",
+      // },
     };
 
     this.$axios
