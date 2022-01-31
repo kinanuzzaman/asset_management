@@ -61,7 +61,7 @@
             <q-item-label>SETTING</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item @click="logout">
+        <q-item clickable @click="logout">
           <q-item-section style="font-size: 2em">
             <q-icon name="logout" />
           </q-item-section>
