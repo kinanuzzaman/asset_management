@@ -71,11 +71,11 @@ export default {
 
       const options = {
         method: "POST",
-        url: "http://127.0.0.1:8000/api/users",
+        url: "/users",
         data: fd,
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        // headers: {
+        //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        // },
       };
 
       this.$axios

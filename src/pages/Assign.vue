@@ -88,9 +88,9 @@ export default {
       const options = {
         method: "GET",
         url: "/products/" + search,
-        headers: {
-          Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
-        },
+        // headers: {
+        //   Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
+        // },
       };
 
       this.$axios
@@ -116,9 +116,9 @@ export default {
         data: {
           user_id: this.userId,
         },
-        headers: {
-          Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
-        },
+        // headers: {
+        //   Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
+        // },
       };
 
       this.$axios

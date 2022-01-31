@@ -28,7 +28,7 @@
         <q-item>
           <q-item-section class="flex flex-center">
             <q-item-label>
-              <q-avatar avatar> <img :src="user.image" alt="" /> </q-avatar
+              <q-avatar avatar> <img :src="image" alt="" /> </q-avatar
             ></q-item-label>
           </q-item-section>
         </q-item>
@@ -203,6 +203,7 @@ export default {
       ralert: false,
       user: null,
       full_name: "",
+      image: "",
       products: [],
       category: "",
       user_id: "",
@@ -218,9 +219,9 @@ export default {
       const options = {
         method: "GET",
         url: "/users/" + this.userId,
-        headers: {
-          Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
-        },
+        // headers: {
+        //   Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
+        // },
       };
 
       this.$axios
@@ -229,6 +230,7 @@ export default {
           console.log(response.data);
           this.user = response.data;
           this.full_name = response.data.full_name;
+          this.image = response.data.image;
         })
         .catch(function (error) {
           console.error(error);
@@ -240,10 +242,10 @@ export default {
 
       const options = {
         method: "PATCH",
-        url: "http://127.0.0.1:8000/api/products/assign/" + this.userId,
-        headers: {
-          Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
-        },
+        url: "/products/assign/" + this.userId,
+        // headers: {
+        //   Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
+        // },
         data: {
           user_id: null,
         },
@@ -268,13 +270,13 @@ export default {
     discardProduct(flag) {
       const options = {
         method: "PATCH",
-        url: "http://127.0.0.1:8000/api/products/discard/" + flag,
+        url: "/products/discard/" + flag,
         data: {
           discard_details: this.discard_details,
         },
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        // headers: {
+        //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        // },
       };
 
       this.$axios
@@ -296,13 +298,13 @@ export default {
     defectProduct(flag) {
       const options = {
         method: "PATCH",
-        url: "http://127.0.0.1:8000/api/products/defect/" + flag,
+        url: "/products/defect/" + flag,
         data: {
           defect_details: this.defect_details,
         },
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        // headers: {
+        //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        // },
       };
 
       this.$axios
@@ -325,10 +327,10 @@ export default {
     delCategory(flag) {
       const options = {
         method: "DELETE",
-        url: "http://127.0.0.1:8000/api/users/" + flag,
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        url: "/users/" + flag,
+        // headers: {
+        //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        // },
       };
 
       this.$axios

@@ -110,9 +110,6 @@ export default {
         method: "POST",
         url: "/admins/register",
         data: fd,
-        // headers: {
-        //   Authorization: "Bearer" + localStorage.getItem("token"),
-        // },
       };
 
       this.$axios
@@ -120,7 +117,8 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.admin = response.data;
-          this.token = response.data.token;
+          // this.token = response.data.token;
+          // localStorage.setItem("token", response.data.token);
           this.$router.push("/");
         })
         .catch(function (error) {

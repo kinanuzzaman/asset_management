@@ -24,11 +24,7 @@
           munir@gmail.com -->
       <q-list>
         <q-item-label header id="hero">
-          <img
-            src="../assets/Admin.png"
-            alt=""
-            style="width: 80px; height: 80px"
-          />
+          <img :src="admin.image" alt="" style="width: 80px; height: 80px" />
           <br />
 
           {{ admin.first_name }} {{ admin.last_name }}<br />
@@ -65,7 +61,7 @@
             <q-item-label>SETTING</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/">
+        <q-item @click="logout">
           <q-item-section style="font-size: 2em">
             <q-icon name="logout" />
           </q-item-section>
@@ -101,8 +97,9 @@ export default {
       url: "/admins/" + this.id,
       // url: "/admins/1",
       headers: {
-        Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
-        // Authorization: 'Bearer' + localStorage.getItem('token')
+        // Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        // Authorization: "Bearer 20|SP1OZFEvk1D3Rb1bsGVnZ8vA6cAoowVTyXqfY44L",
       },
     };
 
@@ -122,6 +119,10 @@ export default {
     },
     getCategory(category) {
       this.intro = category;
+    },
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.push("/");
     },
   },
 };

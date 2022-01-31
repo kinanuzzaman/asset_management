@@ -75,14 +75,8 @@ export default {
 
       const options = {
         method: "POST",
-        url: "/login",
+        url: "/admins/login",
         data: fd,
-        // headers: {
-        //   //Authorization: "Bearer" + localStorage.getItem("token"),
-        // },
-        headers: {
-          Authorization: "Bearer 7|LhUF7CqFjOqVePcvo9FQaGzfpKLU48xgkVvBfcGu",
-        },
       };
 
       this.$axios
@@ -91,6 +85,9 @@ export default {
           console.log(response.data);
           this.admin = response.data;
           this.id = response.data.data.id;
+          this.token = response.data.token;
+          localStorage.setItem("token", response.data.token);
+          // localStorage.removeItem("token");
           // localStorage.setItem("userToken", response.data.token);
           this.$router.push("/main/users/" + this.id);
         })

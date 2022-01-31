@@ -134,9 +134,9 @@ export default {
     const options = {
       method: "GET",
       url: "/categories",
-      headers: {
-        Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-      },
+      // headers: {
+      //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+      // },
     };
 
     this.$axios
@@ -154,7 +154,7 @@ export default {
       //Get data at start
       const options = {
         method: "POST",
-        url: "http://127.0.0.1:8000/api/products",
+        url: "/products",
         data: {
           product_code: this.product_code,
           category_id: this.category_id.id,
@@ -164,9 +164,9 @@ export default {
           defect_details: this.defect_details,
           discard_details: this.discard_details,
         },
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        // headers: {
+        //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        // },
       };
 
       this.$axios

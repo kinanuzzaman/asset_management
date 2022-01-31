@@ -37,10 +37,11 @@ export default {
     const options = {
       method: "GET",
       url: "/users",
-      headers: {
-        Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
-        // Authorization: 'Bearer' + localStorage.getItem('token')
-      },
+      // headers: {
+      //   //Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
+      //   Authorization: "Bearer " + localStorage.getItem("token"),
+      //   // Authorization: "Bearer 20|SP1OZFEvk1D3Rb1bsGVnZ8vA6cAoowVTyXqfY44L",
+      // },
     };
 
     this.$axios

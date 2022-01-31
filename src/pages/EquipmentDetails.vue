@@ -180,9 +180,9 @@ export default {
       const options = {
         method: "GET",
         url: "/categories/" + this.eqId,
-        headers: {
-          Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
-        },
+        // headers: {
+        //   Authorization: "Bearer 3|e8jVTwx52A5yiSG49aWocTuWvBnrfc4NRL7TQEeL",
+        // },
       };
 
       this.$axios
@@ -205,10 +205,10 @@ export default {
     delProduct(flag) {
       const options = {
         method: "DELETE",
-        url: "http://127.0.0.1:8000/api/products/" + flag,
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        url: "/products/" + flag,
+        // headers: {
+        //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        // },
       };
 
       this.$axios
@@ -234,9 +234,9 @@ export default {
         data: {
           discard_details: this.discard_details,
         },
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        // headers: {
+        //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        // },
       };
 
       this.$axios
@@ -262,9 +262,9 @@ export default {
         data: {
           defect_details: this.defect_details,
         },
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        // headers: {
+        //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        // },
       };
 
       this.$axios

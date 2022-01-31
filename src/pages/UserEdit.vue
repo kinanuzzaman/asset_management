@@ -102,9 +102,9 @@ export default {
         method: "POST",
         url: "/users/" + this.userId,
         data: fd,
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        // headers: {
+        //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        // },
       };
 
       this.$axios

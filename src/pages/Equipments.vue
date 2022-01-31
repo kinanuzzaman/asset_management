@@ -146,9 +146,9 @@ export default {
       const options = {
         method: "GET",
         url: "/categories",
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        // headers: {
+        //   Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
+        // },
       };
 
       this.$axios
@@ -166,13 +166,13 @@ export default {
     addCategory() {
       const options = {
         method: "POST",
-        url: "http://127.0.0.1:8000/api/categories",
+        url: "/categories",
         data: {
           name: this.name,
         },
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        // headers: {
+        //   Authorization: "Bearer " + localStorage.getItem("token"),
+        // },
       };
 
       this.$axios
@@ -194,13 +194,13 @@ export default {
     editCategory(flag) {
       const options = {
         method: "PATCH",
-        url: "http://127.0.0.1:8000/api/categories/" + flag,
+        url: "/categories/" + flag,
         data: {
           name: this.name,
         },
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        // headers: {
+        //   Authorization: "Bearer " + localStorage.getItem("token"),
+        // },
       };
 
       this.$axios
@@ -223,10 +223,10 @@ export default {
     delCategory(flag) {
       const options = {
         method: "DELETE",
-        url: "http://127.0.0.1:8000/api/categories/" + flag,
-        headers: {
-          Authorization: "Bearer 1|UgsIPHGbm9W0uyUZT81Tf7BD36UHO5jTlSfwAFWp",
-        },
+        url: "/categories/" + flag,
+        // headers: {
+        //   Authorization: "Bearer " + localStorage.getItem("token"),
+        // },
       };
 
       this.$axios
