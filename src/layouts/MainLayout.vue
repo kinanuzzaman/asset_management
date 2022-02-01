@@ -20,16 +20,25 @@
       bordered
       content-class="bg-grey-1"
     >
-      <!--    Mr.Munir<br />
-          munir@gmail.com -->
       <q-list>
-        <q-item-label header id="hero">
+        <q-item id="hero">
+          <q-item-secton>
+            <q-item-label avatar>
+              <q-avatar> <img :src="admin.image" alt="" /></q-avatar>
+            </q-item-label>
+            <q-item-label>
+              {{ admin.first_name }} {{ admin.last_name }}</q-item-label
+            >
+            <q-item-label> {{ admin.email }}</q-item-label>
+          </q-item-secton>
+        </q-item>
+        <!-- <q-item-label header id="hero">
           <img :src="admin.image" alt="" style="width: 80px; height: 80px" />
           <br />
 
           {{ admin.first_name }} {{ admin.last_name }}<br />
           {{ admin.email }}
-        </q-item-label>
+        </q-item-label> -->
         <!-- Navigate Users -->
         <q-item :to="`/main/users/${id}`" @click="titleChange('Users')">
           <q-item-section style="font-size: 2em">
